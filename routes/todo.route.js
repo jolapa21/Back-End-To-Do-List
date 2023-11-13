@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 const {
     getAllTodo, 
@@ -8,9 +9,8 @@ const {
     updateTodoByID, 
     deleteTodoByID, 
     deleteAllTodo,
-} = require ('../controllers/todo.controller');
+} = require (path.join(__dirname, '../controllers/todo.controller'));
 
-//fungsi route 
 router.get('/', getAllTodo);
 router.get('/:id', getTodoByID);
 router.post('/', addTodo);

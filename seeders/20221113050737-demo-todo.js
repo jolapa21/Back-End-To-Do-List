@@ -1,23 +1,22 @@
 'use strict';
 
+const faker = require('faker');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('todos', [{
-      title: 'Crud',
-      description: 'baru mengerjakan create',
-      isCompleted: false,
+    const todos = Array.from({ length: 10 }, () => ({
+      title: faker.lorem.words(3),
+      description: faker.lorem.sentence(),
+      isCompleted: faker.datatype.boolean(),
       createdAt: new Date(),
       updatedAt: new Date()
-    }]);
+    }));
+
+    await queryInterface.bulkInsert('todos', todos, {});
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete('todos', null, {});
   }
 };

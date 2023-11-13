@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 const {
     register,
     login,
-} = require ('../controllers/user.controller');
+} = require (path.join(__dirname, '../controllers/user.controller'));
 
 router.post('/register', register);
 router.post('/login', login);

@@ -43,10 +43,8 @@ module.exports = {
         })
       }
       
-      // comparing password
       const hasPassword = await bcrypt.compare(req.body.password, users.password)
 
-      // if to check a password
       if (!hasPassword) {
         return res.status(401).json({
           accessToken: null,
@@ -54,13 +52,11 @@ module.exports = {
         })
       }
 
-      // signing token with user email
       const token = await jwt.sign({
         id: users.id
       }, process.env.TOKEN_SECRET, {
         expiresIn: '3600s'
       });
-      // responding to client request with user success message and access token.
       res.status(200).json({
         users: {
           id: users.id,
